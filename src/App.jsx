@@ -1,46 +1,63 @@
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
+import { useEffect } from 'react'
 import Login from './pages/Login'
-import Dashboard from './pages/Dashboard'
-import NotFound from './pages/NotFound'
+import Simplify from './pages/Simplify'
+import Result from './pages/Result'
 import Home from './pages/Home'
-import { useGlobal } from './core/global'
+import { useAuthStore } from './store/authstore'
 import ScrollToTop from './components/ScrollToTop'
-import { NavBar } from './components/NavBar'
+import { Navigate } from 'react-router-dom'
+import { Header } from '@/components/layout/header'
+import NotFound from '@/pages/NotFound'
+function ProtectedRoute ({ children }) {
+  const { isAuthenticated } = useAuthStore()
+
+  if (!isAuthenticated) {
+    return <Navigate to='/' replace />
+  }
+  return <>{children}</>
+}
 
 function App () {
-  const { authenticated } = useGlobal()
-  const location = useLocation()
-
-  // Define routes where NavBar and Footer should be hidden
-  const hiddenRoutes = ['/login', '/admin', '/manage-news']
-  const shouldHideLayout = hiddenRoutes.some(route =>
-    location.pathname.startsWith(route)
-  )
-
+  useEffect(() => {
+    // Add fade in animation to the main element
+    const mainElement = document.querySelector('main')
+    if (mainElement) {
+      mainElement.classList.add('animate-in', 'fade-in', 'duration-300')
+    }
+  }, [])
   return (
-    <div
-      className={`bg-neutral/20 min-h-screen flex flex-col justify-center items-center overflow-x-hidden ${
-        shouldHideLayout ? '' : ''
-      }`}
-    >
+    <div>
       <ScrollToTop />
+      <Header />
 
       {/* Conditionally render NavBar */}
       {/* {!shouldHideLayout && <NavBar />} */}
 
-      <div className={`w-full ${shouldHideLayout ? '' : 'pt-[50px]'}`}>
+      <main className='flex-1'>
         <Routes>
-          {authenticated ? (
-            <>
-              <Route path='/upload' element={<Dashboard />} />
-            </>
-          ) : null}
-
           <Route path='/' element={<Home />} />
+
           <Route path='/login' element={<Login />} />
-          <Route path='*' element={<NotFound />} />
+          <Route
+            path='/simplify'
+            element={
+              <ProtectedRoute>
+                <Simplify />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/result'
+            element={
+              <ProtectedRoute>
+                <Result />
+              </ProtectedRoute>
+            }
+          />
+          <Route path='/*' element={<NotFound />} />
         </Routes>
-      </div>
+      </main>
     </div>
   )
 }
