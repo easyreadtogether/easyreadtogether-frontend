@@ -2,7 +2,7 @@ import { LogOut } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
-import { useAuthStore } from '@/store/authStore'
+import { useAuthStore } from '@/store/authstore'
 
 export function Header () {
   const { isAuthenticated, logout } = useAuthStore()

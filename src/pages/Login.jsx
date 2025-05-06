@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LoginForm } from '@/components/auth/loginform'
-import { useAuthStore } from '@/store/authStore'
+import { useAuthStore } from '@/store/authstore'
 
 function Login () {
   const { isAuthenticated } = useAuthStore()

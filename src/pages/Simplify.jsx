@@ -32,7 +32,7 @@ function Simplify () {
     <div className='container mx-auto my-8 px-4 max-w-5xl'>
       <div className='space-y-4'>
         <div className='space-y-2'>
-          <h1 className='text-3xl font-bold tracking-tight'>
+          <h1 className='!text-3xl font-bold tracking-tight'>
             Simplify your content
           </h1>
           <p className='text-muted-foreground'>
