@@ -11,7 +11,7 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '@/store/authstore';
 
 export function LoginForm() {
   const { login, loading, error } = useAuthStore();
