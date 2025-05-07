@@ -4,7 +4,7 @@ import { LoginForm } from '@/components/auth/loginform'
 import { useAuthStore } from '@/store/authstore'
 
 function Login () {
-  const { isAuthenticated } = useAuthStore()
+  const { isAuthenticated } =  useAuthStore()
   const navigate = useNavigate()
 
   useEffect(() => {

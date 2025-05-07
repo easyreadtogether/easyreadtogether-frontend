@@ -48,17 +48,18 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
   return (
     <div
       className={cn(
-        'flex flex-col gap-6 border  rounded-lg p-6 bg-card text-card-foreground',
+        'flex  gap-6 border items-center  rounded-lg  text-card-foreground',
         getContentClasses()
       )}
+      style={{ pageBreakInside: 'avoid' }}
     >
       {!imageError && (
         <div
           className={cn(
             'relative overflow-hidden rounded-md flex-shrink-0',
             contentLayout === 'image-top'
-              ? 'w-full h-48 md:h-64'
-              : 'w-full md:w-1/3 h-48'
+              ? 'w-full h-48 md:h-auto'
+              : 'w-full md:w-1/3 h-auto'
           )}
         >
           {!imageLoaded && (
@@ -70,7 +71,7 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
             src={content.image_url}
             alt='Content visualization'
             className={cn(
-              'object-contain w-full h-full transition-opacity',
+              'object-contain  w-aito mx-auto max-h-[400px] transition-opacity',
               imageLoaded ? 'opacity-100' : 'opacity-0'
             )}
             onLoad={handleImageLoad}
@@ -81,14 +82,16 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
 
       <div
         className={cn(
-          'prose dark:prose-invert max-w-none',
+          'prose dark:prose-invert max-w-none flex items-start justify-center flex-col p-5  h-full',
           fontSizeClasses[fontSize],
           contentLayout === 'image-top' ? 'w-full' : 'flex-grow'
         )}
       >
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {content.text_markdown}
-        </ReactMarkdown>
+        <div className=' md-container prose max-w-none h-full overflow-y-auto p-4'>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {content.text_markdown}
+          </ReactMarkdown>
+        </div>
       </div>
     </div>
   )

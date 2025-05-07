@@ -1,6 +1,7 @@
 import html2pdf from 'html2pdf.js'
 
 export const downloadAsPdf = async (content, fontSize, contentLayout) => {
+  // Create a temporary div to render the content
   const tempDiv = document.createElement('div')
   tempDiv.className = 'pdf-container'
   tempDiv.style.width = '100%'
@@ -8,21 +9,18 @@ export const downloadAsPdf = async (content, fontSize, contentLayout) => {
   tempDiv.style.margin = '0 auto'
   tempDiv.style.padding = '20px'
 
+  // Set font size
   let fontSizeValue = '16px'
   if (fontSize === 'small') fontSizeValue = '14px'
   if (fontSize === 'large') fontSizeValue = '18px'
 
+  // Add styles
   const style = document.createElement('style')
   style.textContent = `
     .pdf-container {
       font-family: 'Helvetica', sans-serif;
-      color: #000 !important;
+      color: #000;
       line-height: 1.5;
-      background-color: #fff !important;
-    }
-    * {
-      color: inherit !important;
-      background-color: inherit !important;
     }
     .pdf-content-block {
       margin-bottom: 30px;
@@ -49,6 +47,7 @@ export const downloadAsPdf = async (content, fontSize, contentLayout) => {
   `
   tempDiv.appendChild(style)
 
+  // Add title
   const title = document.createElement('h1')
   title.textContent = 'Simplified Content'
   title.style.textAlign = 'center'
@@ -56,23 +55,28 @@ export const downloadAsPdf = async (content, fontSize, contentLayout) => {
   title.style.fontSize = '24px'
   tempDiv.appendChild(title)
 
+  // Generate content blocks
   content.forEach((item, index) => {
     const block = document.createElement('div')
     block.className = 'pdf-content-block'
 
+    // Create image
     const img = document.createElement('img')
     img.src = item.image_url
     img.className = 'pdf-image'
     img.alt = `Content visualization ${index + 1}`
 
+    // Create text
     const textDiv = document.createElement('div')
     textDiv.className = 'pdf-text'
+    // Simple markdown to HTML conversion (basic)
     const htmlContent = item.text_markdown
       .replace(/## (.*)/g, '<h2>$1</h2>')
       .replace(/\* (.*)/g, '<li>$1</li>')
       .replace(/\n\n/g, '<br><br>')
     textDiv.innerHTML = htmlContent
 
+    // Arrange based on layout
     if (contentLayout === 'image-top' || contentLayout === 'image-left') {
       block.appendChild(img)
       block.appendChild(textDiv)
@@ -84,20 +88,12 @@ export const downloadAsPdf = async (content, fontSize, contentLayout) => {
     tempDiv.appendChild(block)
   })
 
-  // Sanitize any remaining oklch colors
-  tempDiv.querySelectorAll('*').forEach(element => {
-    if (window.getComputedStyle(element).color.includes('oklch')) {
-      element.style.color = '#000'
-    }
-    if (window.getComputedStyle(element).backgroundColor.includes('oklch')) {
-      element.style.backgroundColor = 'transparent'
-    }
-  })
-
+  // Append to body temporarily (hidden)
   tempDiv.style.position = 'absolute'
   tempDiv.style.left = '-9999px'
   document.body.appendChild(tempDiv)
 
+  // Generate PDF
   try {
     const options = {
       margin: [10, 10],
@@ -112,5 +108,6 @@ export const downloadAsPdf = async (content, fontSize, contentLayout) => {
     console.error('Error generating PDF:', error)
   }
 
+  // Remove the temporary element
   document.body.removeChild(tempDiv)
 }

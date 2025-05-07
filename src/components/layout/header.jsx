@@ -27,15 +27,22 @@ export function Header () {
           <ThemeToggle />
 
           {isAuthenticated ? (
-            <Button
-              variant='ghost'
-              size='icon'
-              onClick={handleLogout}
-              title='Logout'
-            >
-              <LogOut className='h-4 w-4' />
-              <span className='sr-only'>Logout</span>
-            </Button>
+            <div className='flex flex-row items-center gap-3'>
+              <Button asChild variant='default'>
+                <Link to='/simplify' className='flex items-center gap-2'>
+                  Simplify
+                </Link>
+              </Button>
+              <Button
+                variant='ghost'
+                size='icon'
+                onClick={handleLogout}
+                title='Logout'
+              >
+                <LogOut className='h-4 w-4' />
+                <span className='sr-only'>Logout</span>
+              </Button>
+            </div>
           ) : (
             <Button asChild variant='default'>
               <Link to='/login' className='flex items-center gap-2'>
