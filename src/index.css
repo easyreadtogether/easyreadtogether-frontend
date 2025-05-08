@@ -47,7 +47,7 @@ h1 {
 
 @layer utilities {
   .md-container {
-    @apply max-w-none h-full overflow-y-auto p-4 bg-white text-black;
+    @apply max-w-none h-full overflow-y-auto p-4 bg-white dark:bg-background dark:text-foreground text-black;
   }
 
   .md-container h1,
@@ -60,7 +60,7 @@ h1 {
   }
 
   .md-container p {
-    @apply text-wrap break-words h-auto text-base leading-relaxed mb-[0.3rem];
+    @apply text-wrap break-words leading-relaxed mb-[0.3rem];
   }
 }
 
