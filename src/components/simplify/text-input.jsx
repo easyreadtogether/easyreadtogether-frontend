@@ -9,17 +9,18 @@ export function TextInput () {
     setOriginalText(e.target.value)
   }
 
+  console.log(originalText)
   return (
     <div className='w-full'>
       <Label htmlFor='text-input' className='mb-2 block'>
-        Or type your text here
+        Type your text here
       </Label>
       <Textarea
         id='text-input'
         placeholder='Enter the text you want to simplify...'
         value={originalText}
         onChange={handleTextChange}
-        className='min-h-32 resize-y'
+        className='min-h-64 resize-y'
       />
     </div>
   )

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Download, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -9,12 +9,16 @@ import { LayoutSelector } from '@/components/result/layout-selector'
 import { useContentStore } from '@/store/contentstore'
 import Player from '../components/result/player'
 import html2pdf from 'html2pdf.js'
+import axios from 'axios'
 
-const audio = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
 function Result () {
-  const { simplifiedContent, fontSize, contentLayout } = useContentStore()
+  const { simplifiedContent, fontSize, contentLayout, originalText } =
+    useContentStore()
   const navigate = useNavigate()
   const resultRef = useRef(null)
+  const [audioLoading, setAudioLoading] = useState(false)
+  const [audioUrl, setAudioUrl] = useState(null)
+
   useEffect(() => {
     if (simplifiedContent.length === 0) {
       navigate('/simplify')
@@ -47,7 +51,6 @@ function Result () {
           border-color: #ffffff !important;
         }
         .card {
-          
           margin-bottom: 15px !important;
           page-break-inside: avoid !important;
         }
@@ -113,6 +116,48 @@ function Result () {
     }
   }
 
+  const handleDownloadAudio = async () => {
+    // Combine all text_markdown into a single string
+    const combinedText = simplifiedContent
+      .map(content => content.text_markdown)
+      .join(' ') // Join with spaces for natural speech flow
+    console.log(combinedText)
+    setAudioLoading(true)
+
+    try {
+      const formData = new FormData()
+      formData.append('text', combinedText)
+      formData.append('language', 'English') // Assuming English as default
+
+      const response = await axios.post(
+        'http://18.218.138.236:8000/api/listen',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          responseType: 'blob' // Important for receiving binary data
+        }
+      )
+      console.log(response.data)
+
+      // Create a URL for the audio blob
+      const audioBlob = new Blob([response.data], { type: 'audio/mpeg' })
+      const audioUrl = URL.createObjectURL(audioBlob)
+      setAudioUrl(audioUrl)
+      console.log(audioUrl)
+    } catch (err) {
+      console.error('Error generating audio:', err)
+      // Handle error (show toast, etc.)
+    } finally {
+      setAudioLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    handleDownloadAudio()
+  }, [])
+
   if (simplifiedContent.length === 0) {
     return null
   }
@@ -128,6 +173,9 @@ function Result () {
             <p className='text-muted-foreground'>
               Your content has been simplified and visualized.
             </p>
+            <span className='text-black text-xs text-bold'>
+              Press Play to listen.{' '}
+            </span>
           </div>
 
           <div className='flex items-center gap-2'>
@@ -141,10 +189,21 @@ function Result () {
         </div>
 
         <Separator className='my-2' />
-        <Player
-          className='audio-player' // Added class to identify audio player for PDF exclusion
-          audio_url={audio}
-        />
+        <div className='border flex items-center justify-center p-5 rounded-lg border-black/20'>
+          {audioLoading ? (
+            <div>
+              <div className='flex items-center justify-center'>
+                <div className='w-6 h-6 border-4 border-black mb-3 border-dashed rounded-full animate-spin'></div>
+              </div>
+
+              <p>Generating audio...</p>
+            </div>
+          ) : audioUrl ? (
+            <Player className='audio-player' audioUrl={audioUrl} />
+          ) : (
+            <p>Audio not available</p>
+          )}
+        </div>
         <Separator className='my-2' />
 
         <Button
@@ -157,15 +216,14 @@ function Result () {
         </Button>
         <div className='space-y-8' ref={resultRef}>
           {simplifiedContent.map((content, index) => (
-            <>
+            <div key={index}>
               <ContentBlock
-                key={index}
                 content={content}
                 fontSize={fontSize}
                 contentLayout={contentLayout}
               />
-              {index % 2 === 1 && <div className='page-break-after' />}
-            </>
+              {(index + 1) % 4 === 0 && <div className='page-break-after' />}
+            </div>
           ))}
         </div>
       </div>
@@ -173,4 +231,5 @@ function Result () {
   )
 }
 
+// Usage
 export default Result

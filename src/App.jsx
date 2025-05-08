@@ -13,19 +13,12 @@ function ProtectedRoute ({ children }) {
   const { isAuthenticated } = useAuthStore()
 
   if (!isAuthenticated) {
-    return <Navigate to='/' replace />
+    return <Navigate to='/login' replace />
   }
   return <>{children}</>
 }
 
 function App () {
-  useEffect(() => {
-    // Add fade in animation to the main element
-    const mainElement = document.querySelector('main')
-    if (mainElement) {
-      mainElement.classList.add('animate-in', 'fade-in', 'duration-300')
-    }
-  }, [])
   return (
     <div>
       <ScrollToTop />

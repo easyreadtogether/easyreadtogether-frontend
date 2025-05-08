@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useGlobal } from './global'
 
 export const api = axios.create({
-  baseURL: 'https://api.gizproject.com/api'
+  baseURL: 'http://18.218.138.236:8000/api/'
 })
 
 // Request interceptor to attach the access token
