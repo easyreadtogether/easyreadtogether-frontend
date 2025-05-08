@@ -99,7 +99,7 @@ function Simplify () {
           </Button>
           <Button
             onClick={handleMockSimplify}
-            disabled={loading || !originalText || !file}
+            disabled={loading || !originalText }
           >
             {loading ? 'Processing...' : 'Simplify'}
           </Button>

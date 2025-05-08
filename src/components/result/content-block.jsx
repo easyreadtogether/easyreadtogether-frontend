@@ -87,7 +87,7 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
           contentLayout === 'image-top' ? 'w-full' : 'flex-grow'
         )}
       >
-        <div className=' md-container prose max-w-none h-full overflow-y-auto p-4'>
+        <div className=' md-container bg-red-50 prose max-w-none h-full overflow-y-auto p-4'>
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {content.text_markdown}
           </ReactMarkdown>
