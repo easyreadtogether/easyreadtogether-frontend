@@ -121,7 +121,6 @@ function Result () {
     const combinedText = simplifiedContent
       .map(content => content.text_markdown)
       .join(' ') // Join with spaces for natural speech flow
-    console.log(combinedText)
     setAudioLoading(true)
 
     try {
@@ -139,13 +138,11 @@ function Result () {
           responseType: 'blob' // Important for receiving binary data
         }
       )
-      console.log(response.data)
 
       // Create a URL for the audio blob
       const audioBlob = new Blob([response.data], { type: 'audio/mpeg' })
       const audioUrl = URL.createObjectURL(audioBlob)
       setAudioUrl(audioUrl)
-      console.log(audioUrl)
     } catch (err) {
       console.error('Error generating audio:', err)
       // Handle error (show toast, etc.)
@@ -173,7 +170,7 @@ function Result () {
             <p className='text-muted-foreground'>
               Your content has been simplified and visualized.
             </p>
-            <span className='text-black text-xs text-bold'>
+            <span className='text-black dark:text-white text-xs text-bold'>
               Press Play to listen.{' '}
             </span>
           </div>
@@ -193,7 +190,7 @@ function Result () {
           {audioLoading ? (
             <div>
               <div className='flex items-center justify-center'>
-                <div className='w-6 h-6 border-4 border-black mb-3 border-dashed rounded-full animate-spin'></div>
+                <div className='w-6 h-6 border-4 border-black dark:border-white mb-3 border-dashed rounded-full animate-spin'></div>
               </div>
 
               <p>Generating audio...</p>

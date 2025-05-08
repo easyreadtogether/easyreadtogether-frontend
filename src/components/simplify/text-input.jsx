@@ -9,7 +9,6 @@ export function TextInput () {
     setOriginalText(e.target.value)
   }
 
-  console.log(originalText)
   return (
     <div className='w-full'>
       <Label htmlFor='text-input' className='mb-2 block'>
