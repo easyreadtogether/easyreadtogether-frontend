@@ -60,7 +60,7 @@ h1 {
   }
 
   .md-container p {
-    @apply text-wrap break-words h-auto text-base leading-relaxed mb-[0.3rem];
+    @apply text-wrap break-words leading-relaxed mb-[0.3rem];
   }
 }
 
