@@ -129,7 +129,7 @@ function Result () {
       formData.append('language', 'English') // Assuming English as default
 
       const response = await axios.post(
-        'http://18.218.138.236:8000/api/listen',
+        'https://easyreadtogether-backend-app.com/api/listen',
         formData,
         {
           headers: {
@@ -195,10 +195,8 @@ function Result () {
 
               <p>Generating audio...</p>
             </div>
-          ) : audioUrl ? (
-            <Player className='audio-player' audioUrl={audioUrl} />
           ) : (
-            <p>Audio not available</p>
+            <Player className='audio-player' audioUrl={audioUrl} />
           )}
         </div>
         <Separator className='my-2' />

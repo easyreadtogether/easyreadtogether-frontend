@@ -31,7 +31,7 @@ export function LoginForm () {
     try {
       // Make API call to your authentication endpoint
       const response = await axios.post(
-        'http://18.218.138.236:8000/api/authenticate',
+        'https://easyreadtogether-backend-app.com/api/authenticate',
         {
           password: values.password
         },

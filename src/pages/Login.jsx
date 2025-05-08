@@ -4,7 +4,7 @@ import { LoginForm } from '@/components/auth/loginform'
 import { useAuthStore } from '@/store/authstore'
 
 function Login () {
-  const { isAuthenticated } =  useAuthStore()
+  const { isAuthenticated } = useAuthStore()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -24,26 +24,6 @@ function Login () {
         </div>
 
         <LoginForm />
-
-        <div className='text-center text-sm text-muted-foreground'>
-          <p>
-            By logging in, you agree to our{' '}
-            <a
-              href='#'
-              className='underline underline-offset-4 hover:text-primary'
-            >
-              Terms of Service
-            </a>{' '}
-            and{' '}
-            <a
-              href='#'
-              className='underline underline-offset-4 hover:text-primary'
-            >
-              Privacy Policy
-            </a>
-            .
-          </p>
-        </div>
       </div>
     </div>
   )
