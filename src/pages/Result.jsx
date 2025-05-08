@@ -121,7 +121,6 @@ function Result () {
     const combinedText = simplifiedContent
       .map(content => content.text_markdown)
       .join(' ') // Join with spaces for natural speech flow
-    console.log(combinedText)
     setAudioLoading(true)
 
     try {
@@ -139,13 +138,11 @@ function Result () {
           responseType: 'blob' // Important for receiving binary data
         }
       )
-      console.log(response.data)
 
       // Create a URL for the audio blob
       const audioBlob = new Blob([response.data], { type: 'audio/mpeg' })
       const audioUrl = URL.createObjectURL(audioBlob)
       setAudioUrl(audioUrl)
-      console.log(audioUrl)
     } catch (err) {
       console.error('Error generating audio:', err)
       // Handle error (show toast, etc.)
