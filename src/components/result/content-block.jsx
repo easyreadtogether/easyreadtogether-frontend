@@ -69,6 +69,7 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
           )}
           <img
             src={content.image_url}
+            
             alt='Content visualization'
             className={cn(
               'object-contain  w-aito mx-auto max-h-[300px] transition-opacity',
@@ -89,7 +90,7 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
       >
         <div className=' md-container bg-red-50 prose max-w-none h-full overflow-y-auto p-4'>
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {content.text_markdown}
+            {content.content}
           </ReactMarkdown>
         </div>
       </div>

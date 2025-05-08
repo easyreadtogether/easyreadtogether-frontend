@@ -7,7 +7,7 @@ import { useContentStore } from '@/store/contentstore'
 import axios from 'axios'
 import { useState } from 'react'
 function Simplify () {
-  const { originalText, file, simplifyContent, clearContent, language } =
+  const { originalText, file, setSimplifiedContent, clearContent, language } =
     useContentStore()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
@@ -28,29 +28,27 @@ function Simplify () {
       }
 
       // Add file if available
-      if (file) {
-        formData.append('file', file)
-      }
+      // if (file) {
+      //   formData.append('file', file)
+      // }
 
       // Add language preference
       formData.append('lang', language)
       console.log(language)
       console.log(originalText)
-      console.log(file)
-      // Call the API
-      // const response = await axios.post(
-      //   'http://18.218.138.236:8000/api/simplify',
-      //   formData,
-      //   {
-      //     headers: {
-      //       'Content-Type': 'multipart/form-data'
-      //     }
-      //   }
-      // )
+
+      const response = await axios.post(
+        'https://easyreadtogether-backend-app.com/api/simplify',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      )
 
       // Handle the response (store it in your content store)
-      simplifyContent(response.data)
-      console.log(response)
+      setSimplifiedContent(response.data)
       navigate('/result')
     } catch (err) {
       setError('Unexpected error happned, Proccessing failed!')
@@ -97,10 +95,7 @@ function Simplify () {
           <Button variant='outline' onClick={handleClear}>
             Clear
           </Button>
-          <Button
-            onClick={handleMockSimplify}
-            disabled={loading || !originalText }
-          >
+          <Button onClick={handleSubmit} disabled={loading || !originalText}>
             {loading ? 'Processing...' : 'Simplify'}
           </Button>
         </div>
