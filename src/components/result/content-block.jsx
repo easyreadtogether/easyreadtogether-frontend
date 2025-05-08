@@ -71,7 +71,7 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
             src={content.image_url}
             alt='Content visualization'
             className={cn(
-              'object-contain  w-aito mx-auto max-h-[400px] transition-opacity',
+              'object-contain  w-aito mx-auto max-h-[300px] transition-opacity',
               imageLoaded ? 'opacity-100' : 'opacity-0'
             )}
             onLoad={handleImageLoad}

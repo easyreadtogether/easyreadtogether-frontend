@@ -20,7 +20,7 @@ export function Header () {
           to={isAuthenticated ? '/simplify' : '/'}
           className='flex items-center gap-2'
         >
-          <span className='font-bold text-xl'>Simplify</span>
+          <img src='/logo.png' alt='fenix logo' className='h-10 w-10' />
         </Link>
 
         <div className='flex items-center gap-4'>
