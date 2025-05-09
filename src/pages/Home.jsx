@@ -1,9 +1,9 @@
 import React from 'react'
 import HeroIllustration from '@/components/HeroIllustration'
 import { Link } from 'react-router-dom'
+
 const FeatureSection = ({ image, title, description, reverse = false }) => {
   return (
-    <section className={`py-16 ${reverse ? 'bg-gray-50 dark:bg-white/5' : ''}`}>
     <section className={`py-16 ${reverse ? 'bg-gray-50 dark:bg-white/5 dark:text-white' : ''}`}>
       <div
         className={`container mx-auto px-4 flex flex-col ${
@@ -12,7 +12,7 @@ const FeatureSection = ({ image, title, description, reverse = false }) => {
       >
         <div className='md:w-1/2'>
           <img
-            src={`${image}`}
+            src={image}
             alt={title}
             className='w-full h-auto max-w-md mx-auto rounded-lg'
           />
@@ -22,7 +22,6 @@ const FeatureSection = ({ image, title, description, reverse = false }) => {
           <p className='text-lg text-gray-700 dark:text-white/70'>
             {description}
           </p>
-          <p className='text-lg text-gray-700 dark:text-white/70'>{description}</p>
         </div>
       </div>
     </section>
@@ -32,26 +31,26 @@ const FeatureSection = ({ image, title, description, reverse = false }) => {
 const Home = () => {
   const features = [
     {
-      image: 'education.png',
+      image: '/images/education.png',
       title: 'Simplified Learning',
       description:
         'Our AI-powered platform breaks down complex educational materials into easy-to-understand formats with visual aids and audio support, making learning accessible to all.'
     },
     {
-      image: '/knowledge.png',
+      image: '/images/knowledge.png',
       title: 'Knowledge for Everyone',
       description:
         'We transform dense information into clear, simple content while preserving the original meaning. No more struggling with complicated texts - knowledge should be universally accessible.',
       reverse: true
     },
     {
-      image: '/working.png',
+      image: '/images/working.png',
       title: 'Workplace Inclusion',
       description:
         'Help your team understand important documents and policies with our simplified versions. Perfect for training materials, HR documents, and company communications.'
     },
     {
-      image: '/reading.png',
+      image: '/images/reading.png',
       title: 'Enjoy Reading Again',
       description:
         'Rediscover the joy of reading with content tailored to your comprehension level. Our technology helps bridge literacy gaps for better understanding.',
@@ -68,7 +67,7 @@ const Home = () => {
             Reading Made Simple, for everyone, everywhere
           </h1>
 
-          <p className='text-lg md:text-xl max-w-3xl mb-12'>
+          <p className='text-lg md:text-xl max-w-3xl mb-12 text-gray-700 dark:text-white/70'>
             Transforming complex text into simple, visual-rich content – and
             listen to it read aloud. Powered by inclusive AI, we deliver clarity
             in Swahili, English, and beyond, because understanding should be
@@ -94,12 +93,10 @@ const Home = () => {
 
       {/* Call to Action Section */}
       <section className='py-20 bg-primary dark:bg-background text-white text-center'>
-      <section className='py-20 bg-primary dark:bg-background text-white text-center'>
         <div className='container mx-auto px-4'>
           <h2 className='text-3xl md:text-4xl font-bold mb-6'>
             Ready to Experience Simpler Reading?
           </h2>
-          <p className='text-xl dark:text-white/70 mb-8 max-w-2xl mx-auto'>
           <p className='text-xl mb-8 max-w-2xl mx-auto dark:text-white/70'>
             Join thousands of users who are already benefiting from our content
             simplification platform.

@@ -155,7 +155,7 @@ function Result () {
                 fontSize={fontSize}
                 contentLayout={contentLayout}
               />
-              {index % 2 === 1 && <div className='page-break-after' />}
+              {(index + 1) % 3 === 0 && <div className='page-break-after' />}
             </>
           ))}
         </div>
