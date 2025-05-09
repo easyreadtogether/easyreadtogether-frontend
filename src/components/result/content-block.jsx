@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import { cn } from '@/lib/utils'
 
 const fontSizeClasses = {
@@ -82,10 +81,8 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
           contentLayout === 'image-top' ? 'w-full' : 'flex-grow'
         )}
       >
-        <div className='md-container prose max-w-none h-full overflow-y-auto p-4'>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {content.content}
-          </ReactMarkdown>
+        <div className=' md-container max-w-none h-full overflow-y-auto p-4'>
+          <ReactMarkdown>{content.content}</ReactMarkdown>
         </div>
       </div>
     </div>

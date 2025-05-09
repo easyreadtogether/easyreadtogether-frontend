@@ -44,12 +44,12 @@ h1 {
     @apply font-bold text-base;
   }
 }
-
 @layer utilities {
   .md-container {
     @apply max-w-none h-full overflow-y-auto p-4 bg-white dark:bg-background dark:text-foreground text-black;
   }
 
+  /* Headings */
   .md-container h1,
   .md-container h2,
   .md-container h3,
@@ -59,11 +59,62 @@ h1 {
     @apply text-wrap break-words h-auto text-gray-900 font-bold mb-[1.5rem];
   }
 
+  /* Paragraphs */
   .md-container p {
     @apply text-wrap break-words leading-relaxed mb-[0.3rem];
   }
-}
 
+  /* Lists */
+  .md-container ul,
+  .md-container ol {
+    @apply my-4 pl-6;
+  }
+
+    .md-container ul {
+    @apply pl-6 my-4;
+    list-style: none;
+  }
+  
+  .md-container ul li {
+    @apply mb-2 relative pl-4;
+  }
+  
+  .md-container ul li::before {
+    content: "•";
+    @apply absolute left-0 text-black;
+    /* Adjust these values to match your design */
+    font-size: 1.2em;
+    line-height: 1;
+  }
+
+  /* Dark mode - keeps bullets black */
+  .dark .md-container ul li::before {
+    color: white;
+  }
+  /* Blockquotes */
+  .md-container blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic my-4 text-gray-600 dark:text-gray-300;
+  }
+
+  /* Code blocks */
+  .md-container pre {
+    @apply bg-gray-100 dark:bg-gray-800 p-4 rounded my-4 overflow-x-auto;
+  }
+
+  .md-container code {
+    @apply bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm;
+  }
+
+  /* Horizontal rules */
+  .md-container hr {
+    @apply my-6 border-gray-200 dark:border-gray-700;
+  }
+
+  /* Links */
+  .md-container a {
+    @apply text-blue-600 dark:text-blue-400 hover:underline;
+  }
+}
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
 
