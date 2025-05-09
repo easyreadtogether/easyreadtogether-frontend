@@ -31,26 +31,26 @@ const FeatureSection = ({ image, title, description, reverse = false }) => {
 const Home = () => {
   const features = [
     {
-      image: '/images/education.png',
+      image: '/education.png',
       title: 'Simplified Learning',
       description:
         'Our AI-powered platform breaks down complex educational materials into easy-to-understand formats with visual aids and audio support, making learning accessible to all.'
     },
     {
-      image: '/images/knowledge.png',
+      image: '/knowledge.png',
       title: 'Knowledge for Everyone',
       description:
         'We transform dense information into clear, simple content while preserving the original meaning. No more struggling with complicated texts - knowledge should be universally accessible.',
       reverse: true
     },
     {
-      image: '/images/working.png',
+      image: '/working.png',
       title: 'Workplace Inclusion',
       description:
         'Help your team understand important documents and policies with our simplified versions. Perfect for training materials, HR documents, and company communications.'
     },
     {
-      image: '/images/reading.png',
+      image: '/reading.png',
       title: 'Enjoy Reading Again',
       description:
         'Rediscover the joy of reading with content tailored to your comprehension level. Our technology helps bridge literacy gaps for better understanding.',
