@@ -3,12 +3,6 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { cn } from '@/lib/utils'
 
-// interface ContentBlockProps {
-//   content: SimplifiedContent;
-//   fontSize: FontSize;
-//   contentLayout: ContentLayout;
-// }
-
 const fontSizeClasses = {
   small: 'text-sm',
   medium: 'text-base',
@@ -22,7 +16,7 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
   useEffect(() => {
     setImageLoaded(false)
     setImageError(false)
-  }, [content.image_url])
+  }, [content?.image_url])
 
   const handleImageLoad = () => {
     setImageLoaded(true)
@@ -48,12 +42,12 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
   return (
     <div
       className={cn(
-        'flex  gap-6 border items-center  rounded-lg  text-card-foreground',
+        'flex gap-6 border items-center rounded-lg text-card-foreground',
         getContentClasses()
       )}
       style={{ pageBreakInside: 'avoid' }}
     >
-      {!imageError && (
+      {content?.image_url && (
         <div
           className={cn(
             'relative overflow-hidden rounded-md flex-shrink-0',
@@ -68,11 +62,11 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
             </div>
           )}
           <img
-            src={content.image_url}
-            
+            src={`${content?.image_url}?t=${Date.now()}`}
+            crossOrigin='anonymous'
             alt='Content visualization'
             className={cn(
-              'object-contain  w-aito mx-auto max-h-[300px] transition-opacity',
+              'object-contain w-auto mx-auto max-h-[300px] transition-opacity',
               imageLoaded ? 'opacity-100' : 'opacity-0'
             )}
             onLoad={handleImageLoad}
@@ -83,12 +77,12 @@ export function ContentBlock ({ content, fontSize, contentLayout }) {
 
       <div
         className={cn(
-          'prose dark:prose-invert max-w-none flex items-start justify-center flex-col p-5  h-full',
+          'prose dark:prose-invert max-w-none flex items-start justify-center flex-col p-5 h-full',
           fontSizeClasses[fontSize],
           contentLayout === 'image-top' ? 'w-full' : 'flex-grow'
         )}
       >
-        <div className=' md-container bg-red-50 prose max-w-none h-full overflow-y-auto p-4'>
+        <div className='md-container prose max-w-none h-full overflow-y-auto p-4'>
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {content.content}
           </ReactMarkdown>

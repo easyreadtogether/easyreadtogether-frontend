@@ -3,7 +3,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 
 export function TextInput () {
-  const { originalText, setOriginalText } = useContentStore()
+  const { originalText, setOriginalText, file } = useContentStore()
 
   const handleTextChange = e => {
     setOriginalText(e.target.value)
@@ -20,6 +20,7 @@ export function TextInput () {
         value={originalText}
         onChange={handleTextChange}
         className='min-h-64 resize-y'
+        disabled={file}
       />
     </div>
   )

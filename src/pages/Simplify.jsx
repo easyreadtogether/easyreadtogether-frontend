@@ -28,14 +28,12 @@ function Simplify () {
       }
 
       // Add file if available
-      // if (file) {
-      //   formData.append('file', file)
-      // }
+      if (file) {
+        formData.append('file', file)
+      }
 
       // Add language preference
       formData.append('lang', language)
-      console.log(language)
-      console.log(originalText)
 
       const response = await axios.post(
         'https://easyreadtogether-backend-app.com/api/simplify',
@@ -95,7 +93,10 @@ function Simplify () {
           <Button variant='outline' onClick={handleClear}>
             Clear
           </Button>
-          <Button onClick={handleSubmit} disabled={loading || !originalText}>
+          <Button
+            onClick={handleSubmit}
+            disabled={loading || (!originalText && !file)}
+          >
             {loading ? 'Processing...' : 'Simplify'}
           </Button>
         </div>

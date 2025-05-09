@@ -10,7 +10,8 @@ import {
 } from '@/components/ui/select'
 
 export function FileUpload () {
-  const { file, setFile, language, setLanguage } = useContentStore()
+  const { file, setFile, language, setLanguage, originalText } =
+    useContentStore()
 
   const handleFileChange = e => {
     if (e.target.files && e.target.files[0]) {
@@ -48,8 +49,12 @@ export function FileUpload () {
         {/* File Upload Section */}
         {!file ? (
           <div className=' rounded-lg text-start flex-1  '>
+            <span className='text-xs mt-2 text-muted-foreground mb-4'>
+              Or upload File
+            </span>
             <div>
               <Button
+                disabled={originalText}
                 type='button'
                 variant='outline'
                 onClick={() => document.getElementById(fileInputId)?.click()}
