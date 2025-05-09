@@ -3,6 +3,7 @@ import HeroIllustration from '@/components/HeroIllustration'
 import { Link } from 'react-router-dom'
 const FeatureSection = ({ image, title, description, reverse = false }) => {
   return (
+    <section className={`py-16 ${reverse ? 'bg-gray-50 dark:bg-white/5' : ''}`}>
     <section className={`py-16 ${reverse ? 'bg-gray-50 dark:bg-white/5 dark:text-white' : ''}`}>
       <div
         className={`container mx-auto px-4 flex flex-col ${
@@ -18,6 +19,9 @@ const FeatureSection = ({ image, title, description, reverse = false }) => {
         </div>
         <div className='md:w-1/2'>
           <h2 className='text-3xl font-bold text-primary mb-4'>{title}</h2>
+          <p className='text-lg text-gray-700 dark:text-white/70'>
+            {description}
+          </p>
           <p className='text-lg text-gray-700 dark:text-white/70'>{description}</p>
         </div>
       </div>
@@ -90,10 +94,12 @@ const Home = () => {
 
       {/* Call to Action Section */}
       <section className='py-20 bg-primary dark:bg-background text-white text-center'>
+      <section className='py-20 bg-primary dark:bg-background text-white text-center'>
         <div className='container mx-auto px-4'>
           <h2 className='text-3xl md:text-4xl font-bold mb-6'>
             Ready to Experience Simpler Reading?
           </h2>
+          <p className='text-xl dark:text-white/70 mb-8 max-w-2xl mx-auto'>
           <p className='text-xl mb-8 max-w-2xl mx-auto dark:text-white/70'>
             Join thousands of users who are already benefiting from our content
             simplification platform.

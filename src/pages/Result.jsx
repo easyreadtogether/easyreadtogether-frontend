@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Download, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -10,6 +10,7 @@ import { useContentStore } from '@/store/contentstore'
 import Player from '../components/result/player'
 import html2pdf from 'html2pdf.js'
 
+const audio = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
 function Result () {
   const { simplifiedContent, fontSize, contentLayout } = useContentStore()
   const navigate = useNavigate()
@@ -43,6 +44,7 @@ function Result () {
           border-color: #ffffff !important;
         }
         .card {
+          
           margin-bottom: 15px !important;
           page-break-inside: avoid !important;
         }
@@ -146,14 +148,15 @@ function Result () {
         </Button>
         <div className='space-y-8' ref={resultRef}>
           {simplifiedContent.map((content, index) => (
-            <div key={index}>
+            <>
               <ContentBlock
+                key={index}
                 content={content}
                 fontSize={fontSize}
                 contentLayout={contentLayout}
               />
-              {(index + 1) % 4 === 0 && <div className='page-break-after' />}
-            </div>
+              {index % 2 === 1 && <div className='page-break-after' />}
+            </>
           ))}
         </div>
       </div>
