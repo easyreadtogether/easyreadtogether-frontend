@@ -10,7 +10,6 @@ import { useContentStore } from '@/store/contentstore'
 import Player from '../components/result/player'
 import html2pdf from 'html2pdf.js'
 
-const audio = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
 function Result () {
   const { simplifiedContent, fontSize, contentLayout } = useContentStore()
   const navigate = useNavigate()

@@ -9,6 +9,7 @@ import ScrollToTop from './components/ScrollToTop'
 import { Navigate } from 'react-router-dom'
 import { Header } from '@/components/layout/header'
 import NotFound from '@/pages/NotFound'
+import IPTracker from './components/IpTracker'
 function ProtectedRoute ({ children }) {
   const { isAuthenticated } = useAuthStore()
 
@@ -22,6 +23,7 @@ function App () {
   return (
     <div>
       <ScrollToTop />
+      <IPTracker />
       <Header />
 
       {/* Conditionally render NavBar */}
