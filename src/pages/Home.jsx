@@ -1,11 +1,19 @@
 import React from 'react'
 import HeroIllustration from '@/components/HeroIllustration'
 import { Link } from 'react-router-dom'
-
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent
+} from '@/components/ui/card'
+import { TestimonialCarousel } from '@/components/Testimonal'
+import { TrustBadges } from '@/components/TrustBadges'
 const FeatureSection = ({ image, title, description, reverse = false }) => {
   return (
     <section
-      className={`py-16 ${
+      className={` py-16 md:p-16 ${
         reverse ? 'bg-gray-50 dark:bg-white/5 dark:text-white' : ''
       }`}
     >
@@ -18,14 +26,21 @@ const FeatureSection = ({ image, title, description, reverse = false }) => {
           <img
             src={image}
             alt={title}
-            className='w-full h-auto max-w-md mx-auto rounded-lg'
+            className='w-full max-h-[400px] object-contain max-w-md mx-auto rounded-lg'
           />
         </div>
         <div className='md:w-1/2'>
-          <h2 className='text-3xl font-bold text-primary mb-4'>{title}</h2>
-          <p className='text-lg text-gray-700 dark:text-white/70'>
-            {description}
-          </p>
+          {title && (
+            <h2 className='text-3xl font-bold text-primary mb-4'>{title}</h2>
+          )}
+          {description.map((d, index) => (
+            <p
+              key={index}
+              className='text-lg mb-5 text-gray-700 dark:text-white/70'
+            >
+              {d}
+            </p>
+          ))}
         </div>
       </div>
     </section>
@@ -36,28 +51,32 @@ const Home = () => {
   const features = [
     {
       image: '/education.png',
-      title: 'Simplified Learning',
-      description:
-        'Our AI-powered platform breaks down complex educational materials into easy-to-understand formats with visual aids and audio support, making learning accessible to all.'
+      title: 'How it Works: AI Meets Accessibility',
+      description: [
+        'EasyReadTogether uses Meta’s Llama 3 to simplify text and a finetuned translation model for supporting Swahili, ensuring accuracy and cultural relevance',
+        'Behind the scenes: Secure AWS infrastructure, WCAG-compliant UI, and real-time image pairing and voice generation.'
+      ]
     },
     {
-      image: '/knowledge.png',
-      title: 'Knowledge for Everyone',
-      description:
-        'We transform dense information into clear, simple content while preserving the original meaning. No more struggling with complicated texts - knowledge should be universally accessible.',
+      image: '/img_1.jpg',
+      title: 'Built by the community, for the community',
+      description: [
+        'We didn’t build EasyRead alone. Advocates, caregivers, and users with disabilities shaped every feature – from font size to Swahili translation choice, to voice support'
+      ],
       reverse: true
     },
     {
-      image: '/working.png',
-      title: 'Workplace Inclusion',
-      description:
-        'Help your team understand important documents and policies with our simplified versions. Perfect for training materials, HR documents, and company communications.'
+      image: '/img_2.gif',
+      description: [
+        'Meet Nicholas Ndung’u, a social media influencer with dyslexia and neurodivergent advocate for autism: ‘Most accessibility tools aren’t tested with PWDs who need them most, it’s an amazing opportunity working alongside EasyReadTogether to ensure the tool works for us. As a dyslexic, I am particularly excited about the voice feature..'
+      ]
     },
     {
-      image: '/reading.png',
-      title: 'Enjoy Reading Again',
-      description:
-        'Rediscover the joy of reading with content tailored to your comprehension level. Our technology helps bridge literacy gaps for better understanding.',
+      image: '/img_3.jpg',
+      title: 'Join the movement for Inclusive Information',
+      description: [
+        'Try EasyReadTogether now and see the difference – or partner with us to scale access across Africa and other underserved regions.”.'
+      ],
       reverse: true
     }
   ]
@@ -95,8 +114,66 @@ const Home = () => {
         />
       ))}
 
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl p-10 mx-auto'>
+        {/* Public Agencies Card */}
+        <Card className='border-foreground/10  transition-colors'>
+          <CardHeader>
+            <div className='flex items-center gap-3 mb-2'>
+              <div className='w-4 h-4 rounded-full ' />
+              <CardTitle>For Public Agencies</CardTitle>
+            </div>
+            <CardDescription className='text-base'>
+              Convert your content into Easy Read formats—fast, multilingual,
+              and aligned with your mandates.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className='flex gap-2'>
+              <span className='px-3 py-1 text-xs rounded-full -'>
+                Fast Conversion
+              </span>
+              <span className='px-3 py-1 text-xs rounded-full  '>
+                Multilingual
+              </span>
+              <span className='px-3 py-1 text-xs rounded-full 0 '>
+                Compliant
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Advocates & Educators Card */}
+        <Card className='border-foreground/10  transition-colors'>
+          <CardHeader>
+            <div className='flex items-center gap-3 mb-2'>
+              <div className='w-4 h-4 rounded-full bg-purple-' />
+              <CardTitle>For Advocates & Educators</CardTitle>
+            </div>
+            <CardDescription className='text-base'>
+              Co-curate content, add your language or domain, and help guide
+              inclusive design.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className='flex gap-2 flex-wrap'>
+              <span className='px-3 py-1 text-xs rounded-full '>
+                Collaboration
+              </span>
+              <span className='px-3 py-1 text-xs rounded-full '>
+                Localization
+              </span>
+              <span className='px-3 py-1 text-xs rounded-full '>
+                Inclusive Design
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <TestimonialCarousel />
+      <TrustBadges />
       {/* Call to Action Section */}
-      <section className='py-20 bg-primary dark:bg-background text-white text-center'>
+      {/* <section className='py-20 bg-primary dark:bg-background text-white text-center'>
         <div className='container mx-auto px-4'>
           <h2 className='text-3xl md:text-4xl font-bold mb-6'>
             Ready to Experience Simpler Reading?
@@ -112,7 +189,7 @@ const Home = () => {
             Get Started Now
           </Link>
         </div>
-      </section>
+      </section> */}
       <footer className='p-10'>
         <div className='flex items-center justify-center gap-2'>
           <img src='/logo.png' alt='fenix logo' className='h-35 w-35' />
