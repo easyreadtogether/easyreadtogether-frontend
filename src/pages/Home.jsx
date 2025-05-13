@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom'
 
 const FeatureSection = ({ image, title, description, reverse = false }) => {
   return (
-    <section className={`py-16 ${reverse ? 'bg-gray-50 dark:bg-white/5 dark:text-white' : ''}`}>
+    <section
+      className={`py-16 ${
+        reverse ? 'bg-gray-50 dark:bg-white/5 dark:text-white' : ''
+      }`}
+    >
       <div
         className={`container mx-auto px-4 flex flex-col ${
           reverse ? 'md:flex-row-reverse' : 'md:flex-row'
@@ -109,6 +113,15 @@ const Home = () => {
           </Link>
         </div>
       </section>
+      <footer className='p-10'>
+        <div className='flex items-center justify-center gap-2'>
+          <img src='/logo.png' alt='fenix logo' className='h-35 w-35' />
+        </div>
+        <div className='w-full h-1 bg-black/5 my-10' />
+        <div className='text-center text-sm text-gray-500 pb-4'>
+          © {new Date().getFullYear()} Fenix. All rights reserved.
+        </div>
+      </footer>
     </div>
   )
 }
