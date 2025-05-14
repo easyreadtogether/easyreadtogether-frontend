@@ -13,7 +13,7 @@ export function TrustBadges () {
               className=' object-cover w-full h-full'
             />
           </div>
-          <span className='text-xs'>Meta AI</span>
+          <span className='text-xs'>Llama</span>
         </div>
 
         {/* DPG Badge */}

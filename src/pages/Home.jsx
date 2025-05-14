@@ -50,7 +50,7 @@ const FeatureSection = ({ image, title, description, reverse = false }) => {
 const Home = () => {
   const features = [
     {
-      image: '/education.png',
+      image: '/flow-diagram.png',
       title: 'How it Works: AI Meets Accessibility',
       description: [
         'EasyReadTogether uses Meta’s Llama 3 to simplify text and a finetuned translation model for supporting Swahili, ensuring accuracy and cultural relevance',
@@ -61,7 +61,7 @@ const Home = () => {
       image: '/img_1.jpg',
       title: 'Built by the community, for the community',
       description: [
-        'We didn’t build EasyRead alone. Advocates, caregivers, and users with disabilities shaped every feature – from font size to Swahili translation choice, to voice support'
+        'We didn’t build EasyReadTogether alone. Advocates, caregivers, and users with disabilities shaped every feature – from font size to Swahili translation choice, to voice support'
       ],
       reverse: true
     },
